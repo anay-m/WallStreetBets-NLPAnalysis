@@ -11,7 +11,7 @@ reddit = praw.Reddit(client_id = CLIENT_ID,
                      user_agent = USER_AGENT)
 
 #Access SQL Database
-"""HOST = os.environ["HOST"]
+HOST = os.environ["HOST"]
 USER = os.environ["USER"]
 PASSWORD = os.environ["PASSWORD"]
 DATABASE = os.environ["DATABASE"]
@@ -21,10 +21,10 @@ connection = sql.connect(host = HOST,
                          password= PASSWORD,
                          db= DATABASE)
 
-cursor = connection.cursor()"""
+cursor = connection.cursor()
 #access wallstreetbets subreddit
 subreddit = reddit.subreddit("wallstreetbets")
-posts = subreddit.new(time_filter= 'day')
+posts = subreddit.new(limit = 500)
 
 #Iterate over posts
 for post in posts:
@@ -33,30 +33,29 @@ for post in posts:
         post_title =  post.title
         post_score = post.score
         post_time = dt.datetime.fromtimestamp(post.created_utc)
-        post_body = post.selftext
+        post_body = post.selftext[:10000]
         print(post_body)
+        topic = 'Apple'
         #Create SQL statement and post values
-        post_insert_query = 'INSERT INTO posts (id, title, score, created_utc, body) VALUES (%s, %s, %s, %s, %s)'
-        post_values = (post_id, post_title, post_score, post_time, post_body)
+        post_insert_query = 'INSERT INTO posts (id, title, score, created_utc, body, topic) VALUES (%s, %s, %s, %s, %s, %s)'
+        post_values = (post_id, post_title, post_score, post_time, post_body, topic)
 
         #commit values into SQL database
-        """cursor.execute(post.insert_query, post_values)
-        connection.commit()"""
-        post.comments.replace_more(limit = 10)
+        cursor.execute(post_insert_query, post_values)
+        connection.commit()
+        post.comments.replace_more(limit = 100)
         for comment in post.comments.list():
             comment_body = comment.body
-            print(comment_body)
 
-        
-            """comment_insert_query = "INSERT INTO comments (post_id, comment_body) VALUES (%s, %s)"
-            comment_values = (post_id, comment_body)"""
+            comment_insert_query = "INSERT INTO comments (id, body) VALUES (%s, %s)"
+            comment_values = (post_id, comment_body)
 
-            """cursor.execute(comment_insert_query, comment_values)
+            cursor.execute(comment_insert_query, comment_values)
             connection.commit()
 
         
 
 
 cursor.close()
-connection.close()"""
+connection.close()
 
