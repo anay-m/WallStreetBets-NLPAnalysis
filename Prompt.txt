@@ -1,0 +1,8 @@
+Please identify the publicly traded company mentioned in the following information:
+
+"Hi"
+
+Please respond with the company name and its stock market abbreviation. 
+Do not include any other information in your answer other than these two pieces of information separated by a comma. 
+No other end punctuation should be included in your answer including periods. 
+If no company is found to be the topic of the shown information, respond with an empty string.
