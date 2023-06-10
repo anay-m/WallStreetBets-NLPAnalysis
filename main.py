@@ -2,7 +2,6 @@ import praw
 import datetime as dt
 import os
 import pymysql as sql
-import openai as ai
 import time 
 import topic_finder as tf
 #Access Client Info
@@ -24,37 +23,13 @@ connection = sql.connect(host = HOST,
                          password= PASSWORD,
                          db= DATABASE)
 
-#Access OpenAI API
-AI_KEY = os.environ["AI_KEY"]
-ai.api_key = AI_KEY
-
-
-"""def get_topic(title): #version number 3.5-turbo
-
-    #Prompt for Chat-Gpt
-    prompt = f'''Please identify the publicly traded company discussed in the following information: 
-    {title} Please respond with the company name and then its stock market abbreviation in that order. 
-    Example: "Company Name", "Stock Abbreviation" You response should strictly follow this format and do not use
-    any other words. Response Example: apple, inc, aapl 
-    Response Example: microsoft, msft
-    Response Example: Meta, inc., meta
-    Follow this formatting strictly and do not include anything extra or anything less than this format.
-    Do not repreat the information given to you or include anything other than the specific format given above. 
-    Do not include any other information in your answer other than these two pieces of information 
-    separated by a comma. No other end punctuation should be included in your answer including 
-    periods. If no company is found to be the topic of the shown information, respond with an empty string.'''
-
-    #messages = [{"content": prompt}]
-
-    response = ai.Completion.create(
-        model="text-curie-001",
-        prompt=prompt,
-        temperature=0, # this is the degree of randomness of the model's output
-    )
-    #return response.choices[0].message["content"]
-    return response.choices[0].text.strip()"""
 
 cursor = connection.cursor()
+cursor.execute("DELETE FROM posts")
+connection.commit()
+cursor.execute("DELETE FROM comments")
+connection.commit()
+
 #access wallstreetbets subreddit
 subreddit = reddit.subreddit("wallstreetbets")
 posts = subreddit.new(limit = 5)
