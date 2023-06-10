@@ -4,6 +4,7 @@ import os
 import pymysql as sql
 import openai as ai
 import time 
+import topic_finder as tf
 #Access Client Info
 CLIENT_ID = os.environ["CLIENT_ID"]
 CLIENT_SECRET = os.environ["CLIENT_SECRET"]
@@ -28,7 +29,7 @@ AI_KEY = os.environ["AI_KEY"]
 ai.api_key = AI_KEY
 
 
-def get_topic(title): #version number 3.5-turbo
+"""def get_topic(title): #version number 3.5-turbo
 
     #Prompt for Chat-Gpt
     prompt = f'''Please identify the publicly traded company discussed in the following information: 
@@ -51,7 +52,8 @@ def get_topic(title): #version number 3.5-turbo
         temperature=0, # this is the degree of randomness of the model's output
     )
     #return response.choices[0].message["content"]
-    return response.choices[0].text.strip()
+    return response.choices[0].text.strip()"""
+
 cursor = connection.cursor()
 #access wallstreetbets subreddit
 subreddit = reddit.subreddit("wallstreetbets")
@@ -64,7 +66,8 @@ for post in posts:
     post_score = post.score
     post_time = dt.datetime.fromtimestamp(post.created_utc)
     post_body = post.selftext[:10000]
-    topic = get_topic(post_title).lower()
+    input = f"{post_title}, {post_body}"
+    topic = tf.main(post_title).lower()
     #Create SQL statement and post values
     print(topic)
     post_insert_query = 'INSERT INTO posts (id, title, score, created_utc, body, topic) VALUES (%s, %s, %s, %s, %s, %s)'
