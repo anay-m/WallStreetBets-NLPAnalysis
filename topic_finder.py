@@ -1,6 +1,7 @@
 import spacy
 from fuzzywuzzy import fuzz
 from fuzzywuzzy import process
+import json
 import csv
 import requests
 
@@ -22,26 +23,32 @@ def fetch_company_data():
             company_symb_dict[row[0].upper()] = row[1]
             company_name_dict[row[1]] = row[0].upper()
             
-    return company_symb_dict, company_name_dict
+    with open("stocks_symb.json", 'w') as file:
+        json.dump(company_symb_dict, file)
+        
+    with open("stocks_name.json", 'w') as file:
+        json.dump(company_name_dict, file)
 
-# Function to analyze sentiment and extract the topic, company name, and stock abbreviation
-def analyze_sentiment(text, company_symb_dict, company_name_dict):
-    #text = text.upper()
+# Function to analyze text and extract the topic (company name) and stock abbreviation
+def analyze_topic(text, company_symb_dict, company_name_dict):
     doc = nlp(text)
     company = ''
     stock_abbreviation = ''
     max1 = 0
+    old_pos = ''
     for token in doc:
         token_text = token.text
-        store = token.pos_
+        pos = token.pos_
         if company_symb_dict.get(token.text):
-            token_text = company_symb_dict.get(token.text)
-            store = 'NOUN'
+            pos = 'NOUN'
+        elif old_pos == 'SYM':
+            pos = 'NOUN'
+            token_text = token.text.upper()
             
-        if store == 'NOUN' or store == 'PROPN':
+        if pos == 'NOUN' or pos == 'PROPN':
             closest_name_match = process.extractOne(token_text, list(company_symb_dict.values()))
             closest_symb_match = process.extractOne(token_text, list(company_symb_dict.keys()))
-            if closest_name_match[1] > closest_symb_match[1] or len(closest_symb_match[0]) <= len(token_text):
+            if closest_name_match[1] > closest_symb_match[1] or len(closest_symb_match[0]) < len(token_text):
                 if closest_name_match[1] > max1:
                     company = closest_name_match[0]
                     stock_abbreviation = company_name_dict.get(company)
@@ -51,45 +58,20 @@ def analyze_sentiment(text, company_symb_dict, company_name_dict):
                     stock_abbreviation = closest_symb_match[0] 
                     company = company_symb_dict.get(stock_abbreviation)
                     max1 = closest_symb_match[1]
-                       
-
-
-    """# Find the most relevant entity as the company name
-    for entity, label in entities:
-        test = entity
-        yes = label
-        no = "fuck"
-        if label == 'ORG' or label == 'PRODUCT':
-            closest_match = process.extractOne(entity, company_list)
-            if closest_match[1] >= 80:
-                company = closest_match[0]
-            else:
-                # Perform autocompletion on company names
-                closest_match = process.extractOne(entity, company_list, scorer=fuzz.token_sort_ratio)
-                if closest_match[1] >= 80:
-                    company = closest_match[0]
-            break
-    if len(entities) == 0:
-        closest_match = process.extractOne(text, company_list)
-        if closest_match[1] >= 80:
-                company = closest_match[0]
-        else:
-            # Perform autocompletion on company names
-            closest_match = process.extractOne(entity, company_list, scorer=fuzz.token_sort_ratio)
-            if closest_match[1] >= 80:
-                company = closest_match[0]"""
-
-    # Find the stock abbreviation for the company
+        old_pos = pos
 
     try:
         return company, stock_abbreviation
     except UnboundLocalError:
         return "Unfound", "Unfound"
-# List of known company names with their stock abbreviations
+
 def main(title):
-    company_symb_dict, company_name_dict = fetch_company_data()
+    with open("stocks_name.json", 'r') as file:
+        company_name_dict = json.load(file)
+    with open("stocks_symb.json", 'r') as file:
+        company_symb_dict = json.load(file)
     # Example usage
-    company, stock_abbreviation = analyze_sentiment(title, company_symb_dict, company_name_dict)
+    company, stock_abbreviation = analyze_topic(title, company_symb_dict, company_name_dict)
     print("Company:", company)
     print("Stock Abbreviation:", stock_abbreviation)
     return f"{company}, {stock_abbreviation}"
