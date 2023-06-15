@@ -6,6 +6,7 @@ import openai as ai
 import time 
 import topic_finder as tf
 import asyncio
+from multiprocessing import Pool
 #Access Client Info
 CLIENT_ID = os.environ["CLIENT_ID"]
 CLIENT_SECRET = os.environ["CLIENT_SECRET"]
@@ -31,8 +32,7 @@ cursor = connection.cursor()
 subreddit = reddit.subreddit("wallstreetbets")
 posts = subreddit.new(limit = 5)
 
-#Iterate over posts
-for post in posts:
+def process_post(post):
     post_id = post.id
     post_title =  post.title
     post_score = post.score
@@ -57,7 +57,36 @@ for post in posts:
 
         cursor.execute(comment_insert_query, comment_values)
         connection.commit()
-    
+#Iterate over posts
+#for post in posts:
+with Pool(5) as pool:
+    pool.map(process_post, posts)
+    """
+    post_id = post.id
+    post_title =  post.title
+    post_score = post.score
+    post_time = dt.datetime.fromtimestamp(post.created_utc)
+    post_body = post.selftext[:10000]
+    input = f"{post_title}, {post_body}"
+    topic = tf.main(post_title).lower()
+    #Create SQL statement and post values
+    print(topic)
+    post_insert_query = 'INSERT INTO posts (id, title, score, created_utc, body, topic) VALUES (%s, %s, %s, %s, %s, %s)'
+    post_values = (post_id, post_title, post_score, post_time, post_body, topic)
+
+        #commit values into SQL database
+    cursor.execute(post_insert_query, post_values)
+    connection.commit()
+    post.comments.replace_more(limit = 5)
+    for comment in post.comments.list():
+        comment_body = comment.body
+
+        comment_insert_query = "INSERT INTO comments (id, body, topic) VALUES (%s, %s, %s)"
+        comment_values = (post_id, comment_body, topic)
+
+        cursor.execute(comment_insert_query, comment_values)
+        connection.commit()
+    """
         
 
 

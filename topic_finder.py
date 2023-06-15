@@ -51,14 +51,29 @@ def analyze_sentiment(text, company_symb_dict, company_name_dict):
                     stock_abbreviation = closest_symb_match[0] 
                     company = company_symb_dict.get(stock_abbreviation)
                     max1 = closest_symb_match[1]
-                       
+                    
+
+    # Find the stock abbreviation for the company
+
+    try:
+        return company, stock_abbreviation
+    except UnboundLocalError:
+        return "Unfound", "Unfound"
+# List of known company names with their stock abbreviations
+def main(title):
+    company_symb_dict, company_name_dict = fetch_company_data()
+    # Example usage
+    company, stock_abbreviation = analyze_sentiment(title, company_symb_dict, company_name_dict)
+    print("Company:", company)
+    print("Stock Abbreviation:", stock_abbreviation)
+    return f"{company}, {stock_abbreviation}"
 
 
-    """# Find the most relevant entity as the company name
+
+""" Find the most relevant entity as the company name
     for entity, label in entities:
         test = entity
         yes = label
-        no = "fuck"
         if label == 'ORG' or label == 'PRODUCT':
             closest_match = process.extractOne(entity, company_list)
             if closest_match[1] >= 80:
@@ -77,22 +92,6 @@ def analyze_sentiment(text, company_symb_dict, company_name_dict):
             # Perform autocompletion on company names
             closest_match = process.extractOne(entity, company_list, scorer=fuzz.token_sort_ratio)
             if closest_match[1] >= 80:
-                company = closest_match[0]"""
+                company = closest_match[0]
 
-    # Find the stock abbreviation for the company
-
-    try:
-        return company, stock_abbreviation
-    except UnboundLocalError:
-        return "Unfound", "Unfound"
-# List of known company names with their stock abbreviations
-def main(title):
-    company_symb_dict, company_name_dict = fetch_company_data()
-    # Example usage
-    company, stock_abbreviation = analyze_sentiment(title, company_symb_dict, company_name_dict)
-    print("Company:", company)
-    print("Stock Abbreviation:", stock_abbreviation)
-    return f"{company}, {stock_abbreviation}"
-
-title = input("Company/stock name: ")
-main(title)
+                """
