@@ -58,25 +58,12 @@ def analyze_topic(text, company_symb_dict, company_name_dict):
                     stock_abbreviation = closest_symb_match[0] 
                     company = company_symb_dict.get(stock_abbreviation)
                     max1 = closest_symb_match[1]
-<<<<<<< HEAD
-                    
-
-    # Find the stock abbreviation for the company
-=======
         old_pos = pos
->>>>>>> c43963ec36ce8d24f9a1d2b22a5e551f1704b5c6
 
     try:
         return company, stock_abbreviation
     except UnboundLocalError:
         return "Unfound", "Unfound"
-<<<<<<< HEAD
-# List of known company names with their stock abbreviations
-def main(title):
-    company_symb_dict, company_name_dict = fetch_company_data()
-    # Example usage
-    company, stock_abbreviation = analyze_sentiment(title, company_symb_dict, company_name_dict)
-=======
 
 def main(title):
     with open("stocks_name.json", 'r') as file:
@@ -85,40 +72,9 @@ def main(title):
         company_symb_dict = json.load(file)
     # Example usage
     company, stock_abbreviation = analyze_topic(title, company_symb_dict, company_name_dict)
->>>>>>> c43963ec36ce8d24f9a1d2b22a5e551f1704b5c6
     print("Company:", company)
     print("Stock Abbreviation:", stock_abbreviation)
     return f"{company}, {stock_abbreviation}"
 
-<<<<<<< HEAD
-
-
-""" Find the most relevant entity as the company name
-    for entity, label in entities:
-        test = entity
-        yes = label
-        if label == 'ORG' or label == 'PRODUCT':
-            closest_match = process.extractOne(entity, company_list)
-            if closest_match[1] >= 80:
-                company = closest_match[0]
-            else:
-                # Perform autocompletion on company names
-                closest_match = process.extractOne(entity, company_list, scorer=fuzz.token_sort_ratio)
-                if closest_match[1] >= 80:
-                    company = closest_match[0]
-            break
-    if len(entities) == 0:
-        closest_match = process.extractOne(text, company_list)
-        if closest_match[1] >= 80:
-                company = closest_match[0]
-        else:
-            # Perform autocompletion on company names
-            closest_match = process.extractOne(entity, company_list, scorer=fuzz.token_sort_ratio)
-            if closest_match[1] >= 80:
-                company = closest_match[0]
-
-                """
-=======
 title = input("Company/stock name: ")
 main(title)
->>>>>>> c43963ec36ce8d24f9a1d2b22a5e551f1704b5c6
