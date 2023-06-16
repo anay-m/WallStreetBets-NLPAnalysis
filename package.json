@@ -1,0 +1,23 @@
+{
+  "name": "wallstreetbets-website",
+  "version": "1.0.0",
+  "description": "website pulls from reddit to analyze stock perception",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anay-m/WallStreetBets-Website.git"
+  },
+  "author": "Anay Modi & Dev Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anay-m/WallStreetBets-Website/issues"
+  },
+  "homepage": "https://github.com/anay-m/WallStreetBets-Website#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}

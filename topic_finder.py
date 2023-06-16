@@ -59,6 +59,10 @@ def analyze_topic(text, company_symb_dict, company_name_dict):
                     company = company_symb_dict.get(stock_abbreviation)
                     max1 = closest_symb_match[1]
         old_pos = pos
+    
+    if max1 < 70:
+        company = "Unfound"
+        stock_abbreviation = "Unfound"
 
     try:
         return company, stock_abbreviation
@@ -75,6 +79,3 @@ def main(title):
     print("Company:", company)
     print("Stock Abbreviation:", stock_abbreviation)
     return f"{company}, {stock_abbreviation}"
-
-title = input("Company/stock name: ")
-main(title)
