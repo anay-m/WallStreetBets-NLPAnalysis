@@ -4,14 +4,14 @@ from fuzzywuzzy import process
 import json
 import csv
 import requests
-
+import os
 # Load the spaCy English language model with the pre-trained NER component
 nlp = spacy.load('en_core_web_sm')
-
+CSV_URL = os.environ["CSV_URL"]
 # Fetch Company Stock Abbreviation and Name
 def fetch_company_data():
     # Replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-    CSV_URL = 'https://www.alphavantage.co/query?function=LISTING_STATUS&apikey=A4C7A6Z2GY0I40TS'
+    
     company_symb_dict = {}
     company_name_dict = {}
     with requests.Session() as s:

@@ -5,8 +5,9 @@ import praw
 import os
 from tqdm.auto import tqdm
 
+PINECONEKEY = os.environ["PINECONEKEY"]
 pinecone.init(
-    api_key= "e41d9382-7d0c-4537-8635-5235bc87759d",
+    api_key= PINECONEKEY,
     environment= "us-west4-gcp-free"
 )
 device = 'cuda' if torch.cuda.is_available() else 'cpu'

@@ -76,7 +76,7 @@ def process_post(post):
 #Iterate over posts
 #for post in posts:
 
-num_processes = 3
+num_processes = 5
 count = 0
 with Pool(num_processes) as pool:
     pool.map(process_post, posts)
