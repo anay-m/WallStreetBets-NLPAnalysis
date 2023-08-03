@@ -2,7 +2,6 @@ import praw
 import datetime as dt
 import os
 import pymysql as sql
-import openai as ai
 import time 
 import topic_finder as tf
 import asyncio
@@ -29,7 +28,7 @@ cursor = connection.cursor()
 
 #access wallstreetbets subreddit
 subreddit = reddit.subreddit("wallstreetbets")
-posts = subreddit.new(limit = 5)
+posts = subreddit.new(limit = 500)
 
 #Iterate over posts
 for post in posts:

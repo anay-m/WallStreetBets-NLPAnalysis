@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "wallstreetbetstest",
+  "private_key_id": "167d494c2e5f6e563fc61161f893da777677dfa6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwStjFAlw+lZAL\n+H4yMrPiYABUpM0yQz/C1HsJ5t0pRzXcQIgvsWe8e5AGeQx6Zrqz+ZaSGa+sXESB\nBMhXZJJma/2dwnfexMfHMXOLbSFWbFtctNTbg1Mz0duIM1a+4uHmbj5tGRB8zAFI\nqYEYnvqJL8QcIPhGoV8SL+fHLseHwP4pywaWJFh9lqIRkoQW3pviRIf9eynvc5Bj\nZg9sXkELqN5tv9SLEQlxrwpIjG2E3Fv+Zan2qzOQYB1T0HwQH/fHqUL7/oo96Giu\n8Mrzg1CsEYmgyyYQde3AxdtHfik6nNRlXeGmsI8GgoD8Hlx4mp/ixqKbBL6bKbyy\n/HurofZ9AgMBAAECggEACKptNGX0zdjBP21kGqiWYhLRAVgmhAl9OWEDeU2hYnWP\nJrf/WcTRMhkqz76kh+HD3LPwnFbp5UGV1ne7N1yIu8MkMNyN0uP+ZALAyMJBCMQD\ny69R5UZz0RDIR04qvfBeJVsW83rvbgsDJyS55VFvRE4WSEGwopwtFbJIJOjeQwR7\nMKGK0OyqQ06wVgm2wwCRCpNbORGzt+9jjIIkM3dks0BGjj26YHAVFJddCneCbObE\nWfT5LLBC8VtR/zQwRaJcLxa0+s7lri3+x87YIxbfKqRiTapI9DEfjIMNX36l5rjF\nZ6fI2k72F2xeglyVrga768TP6DRF0L22Y+ryu36iewKBgQDfP72yzOd8hUBxJ8dS\n71DgDOvtc2sFr+x//b39tcDR13XNvzFXGAlkNv08v7y+DNHGymHV3uOwYedvEfuq\nGeoeTRB1C/5Hi6IIKUhVekBMzkMdGVnGic08MGoSqD70o/SWtZUaAsL3rH/jpZij\nTWO0d5hxI0xSe6/+H5JI82g/ywKBgQDKJ56sym5kN4Qcbsa31RTcwsJZbDrAljdw\nt9lce3wVywcs7kQPiNi4IN9dvTcUUYZUxzM4NRFTc+djekb5oSGjzboikVOzabVa\nxsVFC1wGzjoa1YLizkqgWUfOnjZQQMfHaD/wR6ScDJ0Fxx5Lfy1jSwSUKcokSNXf\n+yGDszrJ1wKBgQC/gfNd3S46gChOqTvwZgCvogYE9Hx7LXWoOefwKyjUGYshywAt\nYR41TIKhySzEr0SIzfVtPL1/Ag1BF2EWgxJ1mdAjR/2CLEL700YMpUlhWZLy9Fsx\n1+Yp2rIzfQY8YCUh33SfEn1jbyNqChTNCUcdeXZYn1oKa7YGPdkEIWFtTwKBgCPa\nKPsOH8voSKbeQqIByWRpqhw/5J+ZRJXaFVOglt4qlsgyLaHvrDfjpJm0YBtbZg6N\nEZlrV/pL+QKcgg/tstChQNy2l3ifS8mgrQXUwOp4ErgFm+ProDKWAvUy/AD5rDTC\nWWyc2CXQ2txWdxn+oScV++bnDnGm9T93A3efBtMbAoGACu/ja++lyeVbu2AZGbZ3\nmQuF1M8VQBhiayJRtW+nHo8Dg3/sTjazgUp2H7RBvslKJgHPMJ+buZw0ZUKih3Hj\n+HJ4Itz945BpvoJEYP/sAW5EiwOKGWwfLtlBakMYJDCLewdzg5fjkzqGYW0MlnGX\ngNyIjimJ+urJnyhxc0IPuRc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-odjss@wallstreetbetstest.iam.gserviceaccount.com",
+  "client_id": "116166523402235842325",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-odjss%40wallstreetbetstest.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -2,6 +2,7 @@ from sentence_transformers import SentenceTransformer
 import torch
 import pinecone
 import praw
+from better_profanity import profanity
 import os
 from tqdm.auto import tqdm
 
@@ -27,6 +28,9 @@ batch_size = 128
 def lambda_handler(event, context):
     
     post_list = list(subreddit.new(limit = 500))
+    for i in range(len(post_list)-1, -1, -1):
+        if profanity.contains_profanity(post_list[i]):
+            post_list.pop(i)
     pinecone.delete_index(index_name)
     pinecone.create_index(
         name=index_name,
