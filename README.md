@@ -1,2 +1,2 @@
 # WallStreetBets-Website
-Web App that pulls data from WallStreetBets for stock analysis
+Web App that pulls sentiment data from WallStreetBets & financial reports for stock analysis
